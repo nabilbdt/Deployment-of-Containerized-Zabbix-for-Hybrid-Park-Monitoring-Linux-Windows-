@@ -7,6 +7,42 @@
 This project demonstrates the implementation of a centralized supervision infrastructure using Zabbix 7.4.6 deployed via Docker. The setup monitors a hybrid environment consisting of Ubuntu Linux and Windows Server instances hosted on AWS.
 
 ---
+### Infrastructure Architecture
+
+The following diagram illustrates the logical layout of the monitoring environment within AWS, showing the relationship between the containerized Zabbix stack and the hybrid client fleet.
+
+```mermaid
+graph TD
+    subgraph AWS_Cloud [AWS Cloud Region]
+        subgraph VPC [VPC: VPC-Zabbix-Lab]
+            subgraph Subnet [Public Subnet]
+                
+                subgraph Server_Node [EC2: Zabbix Server Host]
+                    Z_Server[Zabbix Server Container]
+                    Z_Web[Zabbix Web UI Nginx]
+                    Z_DB[MySQL 8.0 Database]
+                end
+
+                L_Client[EC2: Linux Client]
+                W_Client[EC2: Windows Client]
+
+                %% Monitoring Flux
+                Z_Server -.->|Port 10050| L_Client
+                Z_Server -.->|Port 10050| W_Client
+                L_Client -.->|Port 10051| Z_Server
+                W_Client -.->|Port 10051| Z_Server
+            end
+        end
+    end
+
+    %% Component Styles
+    style AWS_Cloud fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style VPC fill:#f0f7ff,stroke:#007acc
+    style Server_Node fill:#fff9f0,stroke:#d4a017
+    style L_Client fill:#f0fff0,stroke:#2e7d32
+    style W_Client fill:#f0f0ff,stroke:#1a237e
+```
+---
 
 ### Infrastructure Architecture
 The core environment is built upon a dedicated AWS network to ensure isolated and secure monitoring traffic.
