@@ -1,0 +1,5 @@
+Server=10.0.9.100
+
+ServerActive=10.0.9.100
+
+Hostname=Zabbix server
