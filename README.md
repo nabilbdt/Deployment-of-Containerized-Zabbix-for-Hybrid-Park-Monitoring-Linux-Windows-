@@ -99,6 +99,8 @@ Zabbix Agents were deployed on target machines to collect system metrics.
 **Windows**: Deployed via the Zabbix MSI Agent 2 package.
 **Network Setup**: All agents were configured to communicate via the Zabbix Server's Private IP (10.0.9.100) to maintain internal traffic integrity.
 
+<img width="1689" height="242" alt="Screenshot 2026-01-06 121521" src="https://github.com/user-attachments/assets/91bcce3f-9e73-4443-a91d-6b798114ee94" />
+
 Monitoring Results
 The final implementation provides a unified view of the infrastructure health, verifying active communication across the internal AWS network.
 **CPU Utilization**: Real-time performance tracking.
